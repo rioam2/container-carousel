@@ -1,0 +1,15 @@
+.CarouselContainer {
+  display: block;
+  user-select: none;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.CarouselWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
