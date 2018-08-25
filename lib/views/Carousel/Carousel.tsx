@@ -1,7 +1,23 @@
 import * as React from 'react';
 import { Motion, spring } from 'react-motion';
-import './Carousel.css';
 import { Container } from './components/Container';
+import styled from 'styled-components';
+
+const CarouselContainer = styled.div`
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+`;
+
+const CarouselWrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+`;
 
 export class Carousel extends React.Component<ICarouselProps, ICarouselState> {
   //
@@ -177,7 +193,7 @@ export class Carousel extends React.Component<ICarouselProps, ICarouselState> {
     const translateX = ((focusedElt - 1) / children.length) * 100;
 
     return (
-      <div style={style} ref={this.container} className="CarouselContainer">
+      <CarouselContainer style={style} innerRef={this.container}>
         <Motion
           style={{
             dst: spring(translateX, { stiffness: 400, damping: 50 }),
@@ -186,8 +202,7 @@ export class Carousel extends React.Component<ICarouselProps, ICarouselState> {
           defaultStyle={{ dst: translateX, touch: 0 }}
         >
           {({ dst, touch }) => (
-            <div
-              className="CarouselWrapper"
+            <CarouselWrapper
               style={{
                 transform: `translateX(calc(-${dst}% + ${touch}px))`,
                 width: (children && children.length * 100 + '%') || 0
@@ -196,10 +211,10 @@ export class Carousel extends React.Component<ICarouselProps, ICarouselState> {
               {React.Children.map(children, child => (
                 <Container>{child}</Container>
               ))}
-            </div>
+            </CarouselWrapper>
           )}
         </Motion>
-      </div>
+      </CarouselContainer>
     );
   }
 }
