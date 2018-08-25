@@ -12,7 +12,9 @@
   "bugs": {
     "url": "https://github.com/rioam2/container-carousel/issues"
   },
-
   "main": "index.js",
-  "scripts": {}
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^3.0.1"
+  }
 }
