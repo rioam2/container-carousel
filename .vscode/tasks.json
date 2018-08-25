@@ -1,0 +1,47 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "New Exported Module",
+      "type": "shell",
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+          }
+        },
+        "command": "",
+        "args": [
+          {
+            "value": "if(($compName = Read-Host 'New Module Name: [NewModule]') -eq ''){$compName = 'NewModule'}",
+            "quoting": "weak"
+          },
+          {
+            "value": "if(($dirName = Read-Host 'New Module Subdirectory: [.]') -eq ''){$dirName = '.'}",
+            "quoting": "weak"
+          },
+          {
+            "value": "pushd '${fileDirname}'; (-join('import { ',$compName,' } from ''./',$dirName,'/',$compName,''';\n\n')) + (Get-Content ${fileBasename} | Out-String) | Set-Content ${fileBasename}; mkdir (-join($dirName,'/',$compName)) -Force; cd (-join($dirName,'/',$compName)); ",
+            "quoting": "weak"
+          },
+          {
+            "value": "code-insiders (-join($compName,'.tsx')); ",
+            "quoting": "weak"
+          },
+          {
+            "value": "$name = 'index.ts'; $content = -join('export { ',$compName,' } from ','''./',$compName,''';'); Set-Content -Value $content -Path $name;",
+            "quoting": "weak"
+          }
+        ]
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
