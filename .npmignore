@@ -1,0 +1,6 @@
+# Don't publish source code:
+lib/
+
+# Don't publish Typescript configurations:
+tsconfig.json
+tslint.json
